@@ -1,84 +1,84 @@
 // // // File: src/pages/Scanner.jsx
-// // import React, { useEffect, useRef, useState } from "react";
-// // import { Html5Qrcode } from "html5-qrcode";
-// // import { useNavigate } from "react-router-dom";
+// // // import React, { useEffect, useRef, useState } from "react";
+// // // import { Html5Qrcode } from "html5-qrcode";
+// // // import { useNavigate } from "react-router-dom";
 
-// // export default function Scanner() {
-// //   const scannerRef = useRef(null);
-// //   const [error, setError] = useState("");
-// //   const [scanning, setScanning] = useState(false);
-// //   const navigate = useNavigate();
+// // // export default function Scanner() {
+// // //   const scannerRef = useRef(null);
+// // //   const [error, setError] = useState("");
+// // //   const [scanning, setScanning] = useState(false);
+// // //   const navigate = useNavigate();
 
-// //   useEffect(() => {
-// //     let scanner;
+// // //   useEffect(() => {
+// // //     let scanner;
 
-// //     const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+// // //     const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
-// //     const startScanner = async () => {
-// //       try {
-// //         scanner = new Html5Qrcode("reader");
+// // //     const startScanner = async () => {
+// // //       try {
+// // //         scanner = new Html5Qrcode("reader");
 
-// //         const devices = await Html5Qrcode.getCameras();
-// //         if (!devices.length) {
-// //           setError("No camera found on this device.");
-// //           return;
-// //         }
+// // //         const devices = await Html5Qrcode.getCameras();
+// // //         if (!devices.length) {
+// // //           setError("No camera found on this device.");
+// // //           return;
+// // //         }
 
-// //         const cameraId = devices[0].id;
+// // //         const cameraId = devices[0].id;
 
-// //         await scanner.start(
-// //           cameraId,
-// //           config,
-// //           qrCodeMessage => {
-// //             setScanning(true);
-// //             scanner.stop().then(() => {
-// //               console.log("Scanned Code:", qrCodeMessage);
-// //               navigate(`/product/${qrCodeMessage}`);
-// //             });
-// //           },
-// //           errorMessage => {
-// //             console.warn("Scan error:", errorMessage);
-// //           }
-// //         );
-// //       } catch (err) {
-// //         console.error("Camera error:", err);
-// //         setError("Unable to access camera. Please check permissions.");
-// //       }
-// //     };
+// // //         await scanner.start(
+// // //           cameraId,
+// // //           config,
+// // //           qrCodeMessage => {
+// // //             setScanning(true);
+// // //             scanner.stop().then(() => {
+// // //               console.log("Scanned Code:", qrCodeMessage);
+// // //               navigate(`/product/${qrCodeMessage}`);
+// // //             });
+// // //           },
+// // //           errorMessage => {
+// // //             console.warn("Scan error:", errorMessage);
+// // //           }
+// // //         );
+// // //       } catch (err) {
+// // //         console.error("Camera error:", err);
+// // //         setError("Unable to access camera. Please check permissions.");
+// // //       }
+// // //     };
 
-// //     // Delay scanner start slightly to ensure #reader is rendered
-// //     const timeoutId = setTimeout(() => {
-// //       if (document.getElementById("reader")) {
-// //         startScanner();
-// //       } else {
-// //         setError("Scanner UI failed to render.");
-// //       }
-// //     }, 300);
+// // //     // Delay scanner start slightly to ensure #reader is rendered
+// // //     const timeoutId = setTimeout(() => {
+// // //       if (document.getElementById("reader")) {
+// // //         startScanner();
+// // //       } else {
+// // //         setError("Scanner UI failed to render.");
+// // //       }
+// // //     }, 300);
 
-// //     return () => {
-// //       clearTimeout(timeoutId);
-// //       if (scanner) {
-// //         scanner.stop().catch(() => {});
-// //       }
-// //     };
-// //   }, [navigate]);
+// // //     return () => {
+// // //       clearTimeout(timeoutId);
+// // //       if (scanner) {
+// // //         scanner.stop().catch(() => {});
+// // //       }
+// // //     };
+// // //   }, [navigate]);
 
-// //   return (
-// //     <div className="flex flex-col items-center justify-center p-4 min-h-screen bg-gray-100">
-// //       <h1 className="text-2xl font-bold mb-4">Scan Product QR/Barcode</h1>
-// //       {error && <p className="text-red-600 mb-2">{error}</p>}
-// //       <div
-// //         id="reader"
-// //         className="w-full max-w-md h-[300px] border-4 border-dashed border-gray-300 rounded-md"
-// //       ></div>
-// //       {!scanning && !error && (
-// //         <p className="mt-4 text-sm text-gray-600">
-// //           Point your camera at a QR code or barcode.
-// //         </p>
-// //       )}
-// //     </div>
-// //   );
-// // }
+// // //   return (
+// // //     <div className="flex flex-col items-center justify-center p-4 min-h-screen bg-gray-100">
+// // //       <h1 className="text-2xl font-bold mb-4">Scan Product QR/Barcode</h1>
+// // //       {error && <p className="text-red-600 mb-2">{error}</p>}
+// // //       <div
+// // //         id="reader"
+// // //         className="w-full max-w-md h-[300px] border-4 border-dashed border-gray-300 rounded-md"
+// // //       ></div>
+// // //       {!scanning && !error && (
+// // //         <p className="mt-4 text-sm text-gray-600">
+// // //           Point your camera at a QR code or barcode.
+// // //         </p>
+// // //       )}
+// // //     </div>
+// // //   );
+// // // }
 
 
 // // File: src/pages/Scanner.jsx
@@ -365,7 +365,7 @@ export default function Scanner() {
       try {
         const devices = await BrowserMultiFormatReader.listVideoInputDevices();
         if (devices.length === 0) {
-          setError("No camera devices found.");
+          setError("No camera devices found. Please connect a camera and try again.");
           return;
         }
 
@@ -378,15 +378,15 @@ export default function Scanner() {
             if (result) {
               console.log("✅ Code scanned:", result.getText());
               setScanning(false);
-Promise.resolve()
-  .then(() => codeReader.reset())
-  .then(() => {
-    navigate(`/product/${encodeURIComponent(result.getText())}`);
-  })
-  .catch((err) => {
-    console.error("Failed to reset scanner:", err);
-    navigate(`/product/${encodeURIComponent(result.getText())}`);
-  });
+              Promise.resolve()
+                .then(() => codeReader.reset())
+                .then(() => {
+                  navigate(`/product/${encodeURIComponent(result.getText())}`);
+                })
+                .catch((err) => {
+                  console.error("Failed to reset scanner:", err);
+                  navigate(`/product/${encodeURIComponent(result.getText())}`);
+                });
             } else if (err && err.name !== "NotFoundException") {
               console.warn("Scan error:", err.message);
             }
@@ -396,7 +396,15 @@ Promise.resolve()
         streamStarted = true;
       } catch (err) {
         console.error("Scanner failed to start:", err);
-        setError("Failed to start scanner.");
+        if (err.name === "NotAllowedError") {
+          setError("Camera access denied. Please allow camera access in your browser settings and reload the page.");
+        } else if (err.name === "NotFoundError") {
+          setError("No camera found. Please connect a camera and try again.");
+        } else if (err.name === "NotReadableError") {
+          setError("Camera is in use by another application. Please close other applications using the camera and try again.");
+        } else {
+          setError("Failed to start scanner. Please check your camera connection and try again.");
+        }
       }
     };
 
@@ -405,7 +413,7 @@ Promise.resolve()
     return () => {
       if (streamStarted) {
         try {
-          codeReader.reset(); // ✅ reset releases camera
+          codeReader.reset();
         } catch (e) {
           console.warn("Failed to stop scanner cleanly", e);
         }
@@ -416,7 +424,18 @@ Promise.resolve()
   return (
     <div className="flex flex-col items-center justify-center p-4 min-h-screen bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Scan QR or Barcode</h1>
-      {error && <p className="text-red-600 mb-4">{error}</p>}
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <strong className="font-bold">Error: </strong>
+          <span className="block sm:inline">{error}</span>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="mt-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          >
+            Retry
+          </button>
+        </div>
+      )}
       <video
         ref={videoRef}
         className="w-full max-w-md h-[320px] border-4 border-dashed border-gray-400 rounded-md"
