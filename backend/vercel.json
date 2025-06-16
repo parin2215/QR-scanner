@@ -13,7 +13,7 @@
     }
   ],
   "env": {
-    "MONGODB_URI": "@mongodb_uri",
+    "MONGO_URI": "@MONGO_URI",
     "NODE_ENV": "production"
   }
 } 
