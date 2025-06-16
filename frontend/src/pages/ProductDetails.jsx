@@ -11,7 +11,7 @@ export default function ProductDetails() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`${process.env.VITE_REACT_APP_BACKEND_BASEURL}/api/products/${code}`);
+        const res = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/products/${code}`);
         if (res.data) {
           setProduct(res.data);
         } else {
@@ -37,7 +37,7 @@ export default function ProductDetails() {
         <div className="w-full md:w-1/2 p-4 flex justify-center items-center">
           {product.images && product.images.length > 0 && product.images[0] ? (
             <img
-              src={`${process.env.VITE_REACT_APP_BACKEND_BASEURL}/api/image-proxy?url=${encodeURIComponent(product.images[0])}`}
+              src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/image-proxy?url=${encodeURIComponent(product.images[0])}`}
               alt={product.name}
               className="w-full max-w-sm h-auto object-contain border rounded"
               onError={(e) => {

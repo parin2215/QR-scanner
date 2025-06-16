@@ -5,7 +5,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('${process.env.VITE_REACT_APP_BACKEND_BASEURL}/api/products')
+    fetch('${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/products')
       .then(res => res.json())
       .then(data => {
         setProducts(data);
@@ -15,7 +15,7 @@ export default function AdminDashboard() {
   }, []);
 
   const handleDelete = async (id) => {
-    await fetch(`${process.env.VITE_REACT_APP_BACKEND_BASEURL}/api/products/${id}`, { method: 'DELETE' });
+    await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/products/${id}`, { method: 'DELETE' });
     setProducts(prev => prev.filter(p => p._id !== id));
   };
 
